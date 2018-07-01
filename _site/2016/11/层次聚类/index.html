@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>Git教程</title>
-  <meta name="description" content="介绍">
+  <title>层次聚类</title>
+  <meta name="description" content="一、层次聚类原理介绍1. Hierarchical clustering  聚集法（Agglomerative）：这是一种“自下而上”的方法。将每一个原始数据分成一个cluster，计算这每个cluster之间的“距离”，然后将符合这个“距离”的cluster合并。执行若干次，最终把所有的数据聚到一个cluste...">
   <meta name="author" content="leopardpan">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Git教程">
-  <meta name="twitter:description" content="介绍">
+  <meta name="twitter:title" content="层次聚类">
+  <meta name="twitter:description" content="一、层次聚类原理介绍1. Hierarchical clustering  聚集法（Agglomerative）：这是一种“自下而上”的方法。将每一个原始数据分成一个cluster，计算这每个cluster之间的“距离”，然后将符合这个“距离”的cluster合并。执行若干次，最终把所有的数据聚到一个cluste...">
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Git教程">
-  <meta property="og:description" content="介绍">
+  <meta property="og:title" content="层次聚类">
+  <meta property="og:description" content="一、层次聚类原理介绍1. Hierarchical clustering  聚集法（Agglomerative）：这是一种“自下而上”的方法。将每一个原始数据分成一个cluster，计算这每个cluster之间的“距离”，然后将符合这个“距离”的cluster合并。执行若干次，最终把所有的数据聚到一个cluste...">
   
   <link rel="icon" type="image/png" href="/images/favicon.png" />
   <link href="/images/favicon.png" rel="shortcut icon" type="image/png">
@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2016/07/GitTutorial/">
+  <link rel="canonical" href="http://localhost:4000/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/">
   <link rel="alternate" type="application/rss+xml" title="抠脚男孩儿" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -177,10 +177,10 @@
         <div class="content-wrapper__inner">
             <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title">Git教程</h1>
+    <h1 class="post-title">层次聚类</h1>
     <div class="post-meta">
       <img src="/images/calendar.png" width="20px"/> 
-      <time datetime="2016-07-13 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-07-13</time>  
+      <time datetime="2016-11-13 00:00:00 +0800" itemprop="datePublished" class="post-meta__date date">2016-11-13</time>  
          
       <span id="busuanzi_container_page_pv"> | 阅读：<span id="busuanzi_value_page_pv"></span>次</span>
     </p>
@@ -188,86 +188,205 @@
   </header>
 
   <section class="post">
-    <h3 id="介绍">介绍</h3>
+    <h1 id="一层次聚类原理介绍">一、层次聚类原理介绍</h1>
+<hr />
+<h3 id="1-hierarchical-clustering">1. Hierarchical clustering</h3>
+<ol>
+  <li>
+    <p>聚集法（Agglomerative）：这是一种“自下而上”的方法。将每一个原始数据分成一个cluster，计算这每个cluster之间的“距离”，然后将符合这个“距离”的cluster合并。执行若干次，最终把所有的数据聚到一个cluster中。而聚成什么样的结果，聚成几个类，跟自己设定这个“距离”的阈值而定。</p>
+  </li>
+  <li>
+    <p>分割法（Divisive）：跟上面的方法恰好相反，是一种“自下而上”的方法。因为最终的结果跟上面的一样，但是程序实现的话聚集是比分割容易一些的，因此这个方法很少使用。</p>
+  </li>
+  <li>
+    <p>基本步骤(聚集法)：
+1). 将每个对象归为一类, 共得到N类, 每类仅包含一个对象. 类与类之间的距离就是它们所包含的对象之间的距离
+2). 找到最接近的两个类并合并成一类, 于是总的类数少了一个.
+3). 重新计算新的类与所有旧类之间的距离.
+4). 重复第2步和第3步, 直到最后合并成一个类为止(此类包含了N个对象).</p>
+  </li>
+</ol>
 
-<p>　　Git是做项目的版本管理，你也可以称它们为版本管理工具。假如现在你有一个文件夹，里面可以是项目，也可以是你的个人笔记(如我这个博客)，或者是你的简历、毕业设计等等，都可以使用git来管理。</p>
+<p>层次聚类树如下：
+<img src="https://ws4.sinaimg.cn/large/006tNc79ly1fsuwv9wm6xj30bm099aal.jpg" alt="" /></p>
 
-<p>　　目前常用的版本控制器有Git和SVN，即使这两个你没有全用过，至少也会听过，我这里以Git为例，个人比较喜欢Git，你也可以看看这篇文章：<a href="http://www.worldhello.net/2012/04/12/why-git-is-better-than-svn.html">为什么Git比SVN好</a>。我使用的是Mac，Mac上没自带Git环境，但是作为iOS开发者，我安装Xcode的时候，Xcode里是有自带Git的，所以我不需要考虑怎么去安装Git了。</p>
-
-<h3 id="安装git">安装Git</h3>
-
-<p><strong>在Mac OS X上安装Git</strong></p>
-
-<p>提供两种方法参考：</p>
-
-<blockquote>
-  <p>1、通过homebrew安装Git，具体方法请参考<a href="http://brew.sh/">homebrew的文档</a>    <br />
-2、直接从AppStore安装Xcode，Xcode集成了Git，不过默认没有安装，你需要运行Xcode。</p>
-</blockquote>
-
-<p><strong>在Windows上安装Git</strong></p>
-
-<blockquote>
-  <p>从<a href="https://git-for-windows.github.io">https://git-for-windows.github.io</a> 下载，然后按默认选项安装即可，安装完成后，在开始菜单里找到“Git”-&gt;“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！</p>
-</blockquote>
-
-<h3 id="配置git">配置Git</h3>
-
-<p>安装完成后，还需要最后一步设置，在命令行输入：</p>
-
-<blockquote>
-  <ul>
-    <li>$ git config –global user.name “Your Name”</li>
-    <li>$ git config –global user.email “email@example.com”</li>
-  </ul>
-</blockquote>
-
-<p>“Your Name”： 是每次提交时所显示的用户名，因为Git是分布式版本控制系统，当我们push到远端时，就需要区分每个提交记录具体是谁提交的，这个”Your Name”就是最好的区分。</p>
-
-<p>“email@example.com”： 是你远端仓库的email</p>
-
-<p>–global：用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然我们也可以对某个仓库指定不同的用户名和Email地址。</p>
-
-<h3 id="开始使用-建立仓库">开始使用-建立仓库：</h3>
-
-<p>你在目标文件夹下使命令：</p>
+<h3 id="2-皮尔逊积矩相关系数pearson-product-moment-correlation-coefficient">2. 皮尔逊积矩相关系数（Pearson product-moment correlation coefficient）：</h3>
+<p>（维基百科：https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient）
+在统计学中，它用于度量两个变量X和Y之间的相关（线性相关），其值介于-1与1之间。在自然科学领域中，该系数广泛用于度量两个变量之间的相关程度。
+通常有以下公式计算：</p>
+<ol>
+  <li>公式一：
+<img src="https://ws2.sinaimg.cn/large/006tNc79ly1fsuwwpj2h7j30ef01f0sx.jpg" alt="" /></li>
+  <li>公式二：
+<img src="https://ws2.sinaimg.cn/large/006tNc79ly1fsuwxj2jqgj308r01kdfw.jpg" alt="" /></li>
+  <li>公式三：
+<img src="https://ws4.sinaimg.cn/large/006tNc79ly1fsuwxz6e8rj306501n74a.jpg" alt="" /></li>
+  <li>公式四：
+<img src="https://ws1.sinaimg.cn/large/006tNc79ly1fsuwym8wwej308f02n0su.jpg" alt="" /></li>
+</ol>
 
 <blockquote>
-  <ul>
-    <li>git init  （创建.git文件）</li>
-  </ul>
+  <p>通常情况下通过以下取值范围判断变量的相关强度：
+相关系数     0.8-1.0     极强相关
+                 0.6-0.8     强相关
+                 0.4-0.6     中等程度相关
+                 0.2-0.4     弱相关
+                 0.0-0.2     极弱相关或无相关</p>
 </blockquote>
 
-<p>就会创建一个 <code class="highlighter-rouge">.git</code> 隐藏文件，相当于已经建立了一个本地仓库。</p>
+<p>以上的四个公式是等价的（为啥等价，有待研究），其中第一个公式比较有助于理解，就是用两个样本的协方差除以它们的标准差的积，用它来描述它们的相关性。下面程序实现的话，选择的是容易带入计算的公式四。</p>
 
-<p><strong>添加到暂存区：</strong></p>
+<h1 id="二代码实现">二、代码实现</h1>
+<hr />
+<h3 id="1-数据集">1. 数据集</h3>
+<p>blogdata.txt
+数据集选择的是网上已经整理好的数据，即从100篇英文blog中选出了1412个单词。部分数据如下：
+<img src="https://ws1.sinaimg.cn/large/006tNc79ly1fsux0qo1bgj30ce07r75b.jpg" alt="" /></p>
 
+<p>其中第一列表示每篇blog名，每一行表示每篇blog的词频，把每一行的单词数目当作一个1412维向量进行处理。这样就是100个1412维的数据了，在通过上面介绍的皮尔逊系数去计算它们之间的相关性，并根据相关性把他们分成不同的类。</p>
+
+<h3 id="2-源代码">2. 源代码</h3>
+<p>clusterBase.py</p>
 <blockquote>
-  <ul>
-    <li>git add .   （全部添加到暂存区）</li>
-    <li>git commit -m ‘ first commit’  （提交暂存区的记录到本地仓库）</li>
-  </ul>
+  <p>这个是用来读取数据和计算皮尔逊距离的</p>
 </blockquote>
 
-<h3 id="其它">其它</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>from math import sqrt
 
-<p>git branc 查看时如出现</p>
+def importData(FIFE='blogdata.txt'):
+    blogwords = []
+    blognames = []
+    i = 0
+    f = open(FIFE, 'r')
+    for line in f:
+        i += 1
+        blog = line.split('\t')
+        blognames.append(blog[0])
+        if i != 1:
+            blogwords.append([int(word_c) for word_c in blog[1:]])
+    return blogwords, blognames
 
+def pearson_distance(vector1, vector2):
+    """
+    Calculate distance between two vectors using pearson method
+    See more : http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
+    """
+    sum1 = sum(vector1)
+    sum2 = sum(vector2)
+ 
+    sum1Sq = sum([pow(v, 2) for v in vector1])
+    sum2Sq = sum([pow(v, 2) for v in vector2])
+ 
+    pSum = sum([vector1[i] * vector2[i] for i in range(len(vector1))])
+ 
+    num = pSum - (sum1 * sum2 / len(vector1))
+    den = sqrt((sum1Sq - pow(sum1, 2) / len(vector1)) * (sum2Sq - pow(sum2, 2) / len(vector1)))
+ 
+    if den == 0: return 0.0
+    return 1.0 - num / den
+</code></pre>
+</div>
+<p>hierachiclaCluster.py</p>
 <blockquote>
-  <ul>
-    <li>(HEAD detached at analytics_v2)</li>
-    <li>dev</li>
-    <li>master</li>
-  </ul>
+  <p>主执行程序，产生聚类结果并且将结果画成图</p>
 </blockquote>
 
-<p>代表现在已经进入一个临时的HEAD，可以使用 <code class="highlighter-rouge">git checkout -b temp</code> 创建一个 temp branch，这样临时HEAD上修改的东西就不会被丢掉了。
-然后切换到 dev 分支上，在使用 git branch merge temp，就可以把 temp 分支上的代码合并到 dev 上了。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code># coding=utf-8
+# /usr/bin/python
+from clusterBase import importData, pearson_distance
+# 将cluster封装成一个class，vec的类型是一个列表，表示的是每一篇blog的词频，left和right表示的是每个cluster左右相邻的cluster（这个是为
+# 了后边画图用的，distance是两个vec之间的皮尔逊距离）
+class bicluster:
+    def __init__(self, vec, left=None, right=None, distance=0.0, id=None):
+        self.left = left
+        self.right = right
+        self.vec = vec
+        self.id = id
+        self.distance = distance
+ 
+def hcluster(blogwords, blognames):
+    biclusters = [bicluster(vec=blogwords[i], id=i) for i in range(len(blogwords))]
+    distances = {}  # 字典类型，key为(vec1,vec2),value为它们的皮尔逊距离
+    flag = None;
+    currentclusted = -1
+    # 每次循环减少一个cluster，直到就剩一个cluster
+    while (len(biclusters) &gt; 1):
+        min_val = 1;
+        biclusters_len = len(biclusters)
+        for i in range(biclusters_len - 1):
+            for j in range(i + 1, biclusters_len):
+                if distances.get((biclusters[i].id, biclusters[j].id)) == None:
+                    distances[(biclusters[i].id, biclusters[j].id)] = pearson_distance(biclusters[i].vec,biclusters[j].vec)
+                d = distances[(biclusters[i].id, biclusters[j].id)]
+                if d &lt; min_val:
+                    min_val = d
+                    flag = (i, j)
+        bic1, bic2 = flag
+        # 合并之后的vec为vec1和vec2的均值
+        newvec = [(biclusters[bic1].vec[i] + biclusters[bic2].vec[i]) / 2 for i in range(len(biclusters[bic1].vec))]
+        newbic = bicluster(newvec, left=biclusters[bic1], right=biclusters[bic2], distance=min_val, id=currentclusted)
+        currentclusted -= 1
+        del biclusters[bic2]
+        del biclusters[bic1]
+        biclusters.append(newbic)
+    return biclusters[0]
+ 
+'''
+Print the tree structure, save as a jpeg image file.
+'''
+from PIL import Image, ImageDraw
+ 
+def getheight(clust):
+    if clust.left == None and clust.right == None: return 1
+    return getheight(clust.left) + getheight(clust.right)
+ 
+def getdepth(clust):
+    if clust.left == None and clust.right == None: return 0
+    return max(getdepth(clust.left), getdepth(clust.right)) + clust.distance
+ 
+def drawdendrogram(clust, labels, jpeg='clusters.jpg'):
+    h = getheight(clust) * 20
+    w = 1200
+    depth = getdepth(clust)
+    scaling = float(w - 150) / depth
+ 
+    img = Image.new('RGB', (w, h), (255, 255, 255))
+    draw = ImageDraw.Draw(img)
+    draw.line((0, h / 2, 10, h / 2), fill=(255, 0, 0))
+ 
+    drawnode(draw, clust, 10, (h / 2), scaling, labels)
+    img.save(jpeg, 'JPEG')
+  
+def drawnode(draw, clust, x, y, scaling, labels):
+    if clust.id &lt; 0:
+        h1 = getheight(clust.left) * 20
+        h2 = getheight(clust.right) * 20
+        top = y - (h1 + h2) / 2
+        bottom = y + (h1 + h2) / 2
+        # line length
+        ll = clust.distance * scaling
+        draw.line((x, top + h1 / 2, x, bottom - h2 / 2), fill=(255, 0, 0))
+        draw.line((x, top + h1 / 2, x + ll, top + h1 / 2), fill=(255, 0, 0))
+        draw.line((x, bottom - h2 / 2, x + ll, bottom - h2 / 2), fill=(255, 0, 0))
+        drawnode(draw, clust.left, x + ll, top + h1 / 2, scaling, labels)
+        drawnode(draw, clust.right, x + ll, bottom - h2 / 2, scaling, labels)
+    else:
+        draw.text((x + 5, y - 7), labels[clust.id], (0, 0, 0))
+ 
+if __name__ == '__main__':
+    # pearson_distance
+    blogwords, blognames = importData()
+    clust = hcluster(blogwords, blognames)
+    print clust
+    drawdendrogram(clust, blognames, jpeg='blogclust1.jpg')
+</code></pre>
+</div>
+<h3 id="3-运行结果">3. 运行结果</h3>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fsux1h7hroj30xc1j0q9d.jpg" alt="" /></p>
 
-<p><br /></p>
-
-<p>转载请注明：<a href="http://baixin">潘柏信的博客</a> » <a href="http://baixin.io/2016/07/GitTutorial/">点击阅读原文</a></p>
-
+<h1 id="三总结">三、总结</h1>
+<p>采用层次聚类的方法效果看起来挺不错，但是时间复杂度太大。自底向上的聚集法的时间复杂度为<script type="math/tex">O(n^{2}\log(n))</script>，自顶向下的分割法的时间复杂度为<script type="math/tex">O(2^{n})</script>。层次聚类的算法运算量太大无法运用于大规模数据，所以一般是将层次聚类跟kmeans聚类结合起来使用。
+用层次聚类算法得到信息的初始化信息，比如可以分成多少个簇，中心点的位置信息等，这样接下来可以利用这些信息来做Kmens聚类。这样的好处是可以解决Kmeans算法初始中心位置的随机性而且可以减少运算量，同时又避免了运用层次聚类算法的大运算量。</p>
 
 
   </section>
@@ -336,9 +455,14 @@
 
        <ul class="pager">
         
+        <li class="previous">
+            <a href="/2016/10/jekyll_tutorials1/" data-toggle="tooltip" data-placement="top" title="Jekyll搭建个人博客">上一篇：  <span>Jekyll搭建个人博客</span>
+            </a>
+        </li>
+        
         
         <li class="next">
-            <a href="/2016/10/jekyll_tutorials1/" data-toggle="tooltip" data-placement="top" title="Jekyll搭建个人博客">下一篇：  <span>Jekyll搭建个人博客</span>
+            <a href="/2016/11/markdownTool/" data-toggle="tooltip" data-placement="top" title="Markdown工具集">下一篇：  <span>Markdown工具集</span>
             </a>
         </li>
         
@@ -352,8 +476,8 @@
     <script>
     
     var disqus_config = function () {
-        this.page.url = "http://localhost:4000/2016/07/GitTutorial/";
-        this.page.identifier = "/2016/07/GitTutorial/";
+        this.page.url = "http://localhost:4000/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/";
+        this.page.identifier = "/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/";
     };
     var disqus_shortname = 'ccchooko';
     

@@ -28,7 +28,18 @@ Jekyll 需要依赖：Ruby、bundler
 >* 如果你想使用我的模板，请把 _posts/ 目录下的文章都去掉。
 >* 修改 _config.yml 文件里面的内容为你自己的个人信息。
 
-
+>* 如果你想在自己的博客中使用Latex，请在_include/head.html中加入：
+``` 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+</script>
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+```
 
 
 #### 感谢   

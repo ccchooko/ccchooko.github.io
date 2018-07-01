@@ -5,9 +5,254 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Jun 2018 20:22:28 +0800</pubDate>
-    <lastBuildDate>Sat, 30 Jun 2018 20:22:28 +0800</lastBuildDate>
+    <pubDate>Mon, 02 Jul 2018 02:38:39 +0800</pubDate>
+    <lastBuildDate>Mon, 02 Jul 2018 02:38:39 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>逻辑回归</title>
+        <description>&lt;h2 id=&quot;逻辑回归logic-regression&quot;&gt;逻辑回归（logic regression）&lt;/h2&gt;
+&lt;h3 id=&quot;1-理解&quot;&gt;1. 理解&lt;/h3&gt;
+&lt;p&gt;logistic回归就是一个线性分类模型，它与线性回归的不同点在于：为了将线性回归输出的很大范围的数，例如从负无穷到正无穷，压缩到0和1之间，这样的输出值表达为“可能性”。这样的话在某些情况会更加合理，也会更有说服力。&lt;/p&gt;
+&lt;h5 id=&quot;举例说明一下&quot;&gt;举例说明一下&lt;/h5&gt;
+&lt;p&gt;拿肿瘤的大小跟是否是恶性肿瘤的的例子来说。
+&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fsuxe7yjtdj30pq03xmxo.jpg&quot; alt=&quot;&quot; /&gt;
+根据线性回归模型我们只能预测连续的值，然而对于分类问题，我们需要输出 0 或 1，
+我们可以预测：
+    当 $h_\theta$ 大于等于 0.5 时， 预测 y=1。
+    当 $h_\theta$ 小于 0.5 时， 预测 y=0 对于上图所示的数据， 这样的一个线性模型似乎能很好地完成分类任务。假使我们又观测到一个非常大尺寸的恶性肿瘤，将其作为实例加入到我们的训练集中来，这将使得我们获得一条新的直线.
+&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fsuxf3q0i0j30j205v3z1.jpg&quot; alt=&quot;&quot; /&gt;
+这时，再使用 0.5 作为阀值来预测肿瘤是良性还是恶性便不合适了。可以看出，线性回归模型，因为其预测的值可以超越[0,1]的范围，并不适合解决这样的问题。我们引入一个新的模型， 逻辑回归， 该模型的输出变量范围始终在 0 和 1 之间。 逻辑回归模型的假设是： 
+$h_\theta(x)=g(\theta^TX)$
+其中：
+X 代表特征向量
+g 代表逻辑函数（ logistic function）是一个常用的逻辑函数为 S 形函数（ Sigmoid function），公式为：&lt;/p&gt;
+
+&lt;p&gt;$g(z)=\frac{1}{1+e^{-z}}$
+该函数的图像为：
+&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fsuxfjs04mj30ha07o74h.jpg&quot; alt=&quot;&quot; /&gt;
+合起来，我们得到逻辑回归模型的假设：
+对模型的理解：$h_\theta(x)=\frac{1}{1+e^{-\theta^TX}}$
+$h_\theta(x)$的作用是， 对于给定的输入变量， 根据选择的参数计算输出变量=1 的可能性，即$h_\theta(x)=P(y=1|x;\theta)$&lt;/p&gt;
+&lt;h3 id=&quot;2-代码实现&quot;&gt;2. 代码实现&lt;/h3&gt;
+&lt;p&gt;数据集：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-0.017612   14.053064  0
+-1.395634  4.662541   1
+-0.752157  6.538620   0
+-1.322371  7.152853   0
+0.423363   11.054677  0
+0.406704   7.067335   1
+0.667394   12.741452  0
+-2.460150  6.866805   1
+0.569411   9.548755   0
+-0.026632  10.427743  0
+0.850433   6.920334   1
+1.347183   13.175500  0
+1.176813   3.167020   1
+-1.781871  9.097953   0
+-0.566606  5.749003   1
+0.931635   1.589505   1
+-0.024205  6.151823   1
+-0.036453  2.690988   1
+-0.196949  0.444165   1
+1.014459   5.754399   1
+1.985298   3.230619   1
+-1.693453  -0.557540  1
+...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;代码实现：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import matplotlib.pyplot as plt
+from numpy import *
+
+
+def loadDataSet():
+    dataMat = [];
+    labelMat = []
+    fr = open('testSet.txt')
+    for line in fr.readlines():
+        lineArr = line.strip().split()
+        dataMat.append([1.0, float(lineArr[0]), float(lineArr[1])])
+        labelMat.append(int(lineArr[2]))
+    return dataMat, labelMat
+
+
+def sigmoid(inX):
+    return 1.0 / (1 + exp(-inX))
+
+
+def gradAscent(dataMatIn, classLabels):
+    dataMatrix = mat(dataMatIn)  # convert to NumPy matrix
+    labelMat = mat(classLabels).transpose()  # convert to NumPy matrix
+
+    m, n = shape(dataMatrix)
+    alpha = 0.001
+    maxCycles = 500
+    weights = ones((n, 1))
+
+    for k in range(maxCycles):  # heavy on matrix operations
+        h = sigmoid(dataMatrix * weights)  # matrix mult
+        error = (labelMat - h)  # vector subtraction
+        weights = weights + alpha * dataMatrix.transpose() * error  # matrix mult
+    return weights
+
+
+def GetResult():
+    dataMat, labelMat = loadDataSet()
+    weights = gradAscent(dataMat, labelMat)
+    print weights
+    plotBestFit(weights)
+
+
+def plotBestFit(weights):
+    dataMat, labelMat = loadDataSet()
+    dataArr = array(dataMat)
+    n = shape(dataArr)[0]
+    xcord1 = [];
+    ycord1 = []
+    xcord2 = [];
+    ycord2 = []
+    for i in range(n):
+        if int(labelMat[i]) == 1:
+            xcord1.append(dataArr[i, 1]);
+            ycord1.append(dataArr[i, 2])
+        else:
+            xcord2.append(dataArr[i, 1]);
+            ycord2.append(dataArr[i, 2])
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.scatter(xcord1, ycord1, s=30, c='red', marker='s')
+    ax.scatter(xcord2, ycord2, s=30, c='green')
+    x = arange(-3.0, 3.0, 0.1)
+    y = (-(float)(weights[0][0]) - (float)(weights[1][0]) * x) / (float)(weights[2][0])
+
+    ax.plot(x, y)
+    plt.xlabel('X1');
+    plt.ylabel('X2');
+    plt.show()
+
+
+if __name__ == '__main__':
+    GetResult()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;3-运行结果&quot;&gt;3. 运行结果&lt;/h3&gt;
+&lt;p&gt;结果，返回了特征值的回归系数。我们的数据集有两个特征值分别是x1，x2。我们又增设了了x0变量。得到的结果
+&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fsuxgdf6sjj30bs030wem.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们得出x1和x2的关系（设x0=1），0=4.12414349+0.48007329&lt;em&gt;x1-0.6168482&lt;/em&gt;x2&lt;/p&gt;
+
+&lt;p&gt;画出x1与x2的关系图
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsuxgn658ej30i80fwdh4.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 20 Nov 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</guid>
+        
+        <category>机器学习基础</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>线性回归</title>
+        <description>&lt;h2 id=&quot;线性回归linear-regression&quot;&gt;线性回归（Linear Regression）&lt;/h2&gt;
+
+&lt;p&gt;在回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析被称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则被称为多元线性回归分析。
+回归方程如下:&lt;br /&gt;
+&lt;script type=&quot;math/tex&quot;&gt;h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n&lt;/script&gt;
+所谓的训练也就是利用已知的变量$x_1,x_2,…,x_n$去求$\theta_0,\theta_1,\theta_2,…,\theta_n$。所谓的预测也就是用另一堆变量（$x_1,x_2,…,x_n$）去求$h(\theta)$的值，即预测值。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;以下面的一元回归分析为例&lt;/strong&gt;
+我们想预测特定房子的价值，预测依据是房屋面积。
+我们有下面的数据集：
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsuxiic8hjj305k04njrh.jpg&quot; alt=&quot;&quot; /&gt;
+这是一个一元回归模型，预测得到的回归方程为：
+$y = 28.77659574x + 1771.80851064$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;方程如何得来：&lt;/strong&gt;
+也就是对于$\theta$如何求解，是通过损失函数&lt;script type=&quot;math/tex&quot;&gt;J(\theta)=\frac{1}{2}\sum_{i=1}^n {(h_\theta(x^{(i)})-y^{(i)})^2}&lt;/script&gt;
+如何调整$\theta$使$J(\theta)$取得最小值有很多方法，其中有最小二乘法和梯度下降法等。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;最小二乘法：&lt;/strong&gt;
+&lt;script type=&quot;math/tex&quot;&gt;\theta=(X^TX)^{-1}X^T\vec{y}&lt;/script&gt;
+其中X表示训练特征组成的矩阵，结果表示成$y$向量。但是此方法要求$X$是列满秩的，而且求矩阵比较慢。
+&lt;strong&gt;梯度下降法：&lt;/strong&gt;
+因为用最小二乘法求$\theta$存在局限性，因此采用下面的梯度下降法求解近似解$\theta$。
+由$J(\theta)$公式知道求$\theta^T$转换成了求$J(\theta)$的极小值。
+即：
+&lt;script type=&quot;math/tex&quot;&gt;\theta_j:=\theta_j-\alpha{\frac{\partial}{\partial\theta_j}J(\theta)}&lt;/script&gt;
+其中$\alpha$为学习速率，当$\alpha$过大时，有可能越过最小值；当$\alpha$过小，则可能造成迭代次数过多，收敛速度过慢。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;下面是训练上述房屋信息的程序源码：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# coding=utf-8
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn import datasets, linear_model
+
+
+# Function to get data
+def get_data(file_name):
+    data = pd.read_csv(file_name)  # here ,use pandas to read cvs file.
+    X_parameter = []
+    Y_parameter = []
+    for single_square_feet, single_price_value in zip(data['square_feet'], data['price']):  # 遍历数据，
+        X_parameter.append([float(single_square_feet)])  # 存储在相应的list列表中
+        Y_parameter.append(float(single_price_value))
+    return X_parameter, Y_parameter
+
+
+def linear_model_main(X_parameters, Y_parameters, predict_value):
+    # Create linear regression object
+    regr = linear_model.LinearRegression()
+    regr.fit(X_parameters, Y_parameters)  # train model
+    predict_outcome = regr.predict(predict_value)
+    predictions = {}
+    predictions['intercept'] = regr.intercept_
+    predictions['coefficient'] = regr.coef_
+    predictions['predicted_value'] = predict_outcome
+    return predictions
+
+
+X, Y = get_data('linearTest.csv')
+predictvalue = 700
+result = linear_model_main(X, Y, predictvalue)
+print &quot;Intercept value &quot;, result['intercept']
+print &quot;coefficient&quot;, result['coefficient']
+print &quot;Predicted value: &quot;, result['predicted_value']
+
+
+# Function to show the resutls of linear fit model
+def show_linear_line(X_parameters, Y_parameters):
+    # Create linear regression object
+    regr = linear_model.LinearRegression()
+    regr.fit(X_parameters, Y_parameters)
+    plt.scatter(X_parameters, Y_parameters, color='blue')
+    plt.plot(X_parameters, regr.predict(X_parameters), color='red', linewidth=4)
+    plt.xticks(())
+    plt.yticks(())
+    plt.show()
+
+
+show_linear_line(X, Y)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;运行结果：&lt;/strong&gt;
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsuxiw71nbj30bu03dwep.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsuxj956rwj30i80fwmy0.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 20 Nov 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+        
+        <category>机器学习基础</category>
+        
+        
+      </item>
     
       <item>
         <title>Markdown工具集</title>
@@ -84,6 +329,217 @@ H6 :###### Header 6    &lt;br /&gt;
         <guid isPermaLink="true">http://localhost:4000/2016/11/markdownTool/</guid>
         
         <category>工具</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>层次聚类</title>
+        <description>&lt;h1 id=&quot;一层次聚类原理介绍&quot;&gt;一、层次聚类原理介绍&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;h3 id=&quot;1-hierarchical-clustering&quot;&gt;1. Hierarchical clustering&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;聚集法（Agglomerative）：这是一种“自下而上”的方法。将每一个原始数据分成一个cluster，计算这每个cluster之间的“距离”，然后将符合这个“距离”的cluster合并。执行若干次，最终把所有的数据聚到一个cluster中。而聚成什么样的结果，聚成几个类，跟自己设定这个“距离”的阈值而定。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;分割法（Divisive）：跟上面的方法恰好相反，是一种“自下而上”的方法。因为最终的结果跟上面的一样，但是程序实现的话聚集是比分割容易一些的，因此这个方法很少使用。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;基本步骤(聚集法)：
+1). 将每个对象归为一类, 共得到N类, 每类仅包含一个对象. 类与类之间的距离就是它们所包含的对象之间的距离
+2). 找到最接近的两个类并合并成一类, 于是总的类数少了一个.
+3). 重新计算新的类与所有旧类之间的距离.
+4). 重复第2步和第3步, 直到最后合并成一个类为止(此类包含了N个对象).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;层次聚类树如下：
+&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fsuwv9wm6xj30bm099aal.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-皮尔逊积矩相关系数pearson-product-moment-correlation-coefficient&quot;&gt;2. 皮尔逊积矩相关系数（Pearson product-moment correlation coefficient）：&lt;/h3&gt;
+&lt;p&gt;（维基百科：https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient）
+在统计学中，它用于度量两个变量X和Y之间的相关（线性相关），其值介于-1与1之间。在自然科学领域中，该系数广泛用于度量两个变量之间的相关程度。
+通常有以下公式计算：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;公式一：
+&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fsuwwpj2h7j30ef01f0sx.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;公式二：
+&lt;img src=&quot;https://ws2.sinaimg.cn/large/006tNc79ly1fsuwxj2jqgj308r01kdfw.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;公式三：
+&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fsuwxz6e8rj306501n74a.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;公式四：
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsuwym8wwej308f02n0su.jpg&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;通常情况下通过以下取值范围判断变量的相关强度：
+相关系数     0.8-1.0     极强相关
+                 0.6-0.8     强相关
+                 0.4-0.6     中等程度相关
+                 0.2-0.4     弱相关
+                 0.0-0.2     极弱相关或无相关&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;以上的四个公式是等价的（为啥等价，有待研究），其中第一个公式比较有助于理解，就是用两个样本的协方差除以它们的标准差的积，用它来描述它们的相关性。下面程序实现的话，选择的是容易带入计算的公式四。&lt;/p&gt;
+
+&lt;h1 id=&quot;二代码实现&quot;&gt;二、代码实现&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;h3 id=&quot;1-数据集&quot;&gt;1. 数据集&lt;/h3&gt;
+&lt;p&gt;blogdata.txt
+数据集选择的是网上已经整理好的数据，即从100篇英文blog中选出了1412个单词。部分数据如下：
+&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsux0qo1bgj30ce07r75b.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其中第一列表示每篇blog名，每一行表示每篇blog的词频，把每一行的单词数目当作一个1412维向量进行处理。这样就是100个1412维的数据了，在通过上面介绍的皮尔逊系数去计算它们之间的相关性，并根据相关性把他们分成不同的类。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-源代码&quot;&gt;2. 源代码&lt;/h3&gt;
+&lt;p&gt;clusterBase.py&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;这个是用来读取数据和计算皮尔逊距离的&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from math import sqrt
+
+def importData(FIFE='blogdata.txt'):
+    blogwords = []
+    blognames = []
+    i = 0
+    f = open(FIFE, 'r')
+    for line in f:
+        i += 1
+        blog = line.split('\t')
+        blognames.append(blog[0])
+        if i != 1:
+            blogwords.append([int(word_c) for word_c in blog[1:]])
+    return blogwords, blognames
+
+def pearson_distance(vector1, vector2):
+    &quot;&quot;&quot;
+    Calculate distance between two vectors using pearson method
+    See more : http://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient
+    &quot;&quot;&quot;
+    sum1 = sum(vector1)
+    sum2 = sum(vector2)
+ 
+    sum1Sq = sum([pow(v, 2) for v in vector1])
+    sum2Sq = sum([pow(v, 2) for v in vector2])
+ 
+    pSum = sum([vector1[i] * vector2[i] for i in range(len(vector1))])
+ 
+    num = pSum - (sum1 * sum2 / len(vector1))
+    den = sqrt((sum1Sq - pow(sum1, 2) / len(vector1)) * (sum2Sq - pow(sum2, 2) / len(vector1)))
+ 
+    if den == 0: return 0.0
+    return 1.0 - num / den
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;hierachiclaCluster.py&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;主执行程序，产生聚类结果并且将结果画成图&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# coding=utf-8
+# /usr/bin/python
+from clusterBase import importData, pearson_distance
+# 将cluster封装成一个class，vec的类型是一个列表，表示的是每一篇blog的词频，left和right表示的是每个cluster左右相邻的cluster（这个是为
+# 了后边画图用的，distance是两个vec之间的皮尔逊距离）
+class bicluster:
+    def __init__(self, vec, left=None, right=None, distance=0.0, id=None):
+        self.left = left
+        self.right = right
+        self.vec = vec
+        self.id = id
+        self.distance = distance
+ 
+def hcluster(blogwords, blognames):
+    biclusters = [bicluster(vec=blogwords[i], id=i) for i in range(len(blogwords))]
+    distances = {}  # 字典类型，key为(vec1,vec2),value为它们的皮尔逊距离
+    flag = None;
+    currentclusted = -1
+    # 每次循环减少一个cluster，直到就剩一个cluster
+    while (len(biclusters) &amp;gt; 1):
+        min_val = 1;
+        biclusters_len = len(biclusters)
+        for i in range(biclusters_len - 1):
+            for j in range(i + 1, biclusters_len):
+                if distances.get((biclusters[i].id, biclusters[j].id)) == None:
+                    distances[(biclusters[i].id, biclusters[j].id)] = pearson_distance(biclusters[i].vec,biclusters[j].vec)
+                d = distances[(biclusters[i].id, biclusters[j].id)]
+                if d &amp;lt; min_val:
+                    min_val = d
+                    flag = (i, j)
+        bic1, bic2 = flag
+        # 合并之后的vec为vec1和vec2的均值
+        newvec = [(biclusters[bic1].vec[i] + biclusters[bic2].vec[i]) / 2 for i in range(len(biclusters[bic1].vec))]
+        newbic = bicluster(newvec, left=biclusters[bic1], right=biclusters[bic2], distance=min_val, id=currentclusted)
+        currentclusted -= 1
+        del biclusters[bic2]
+        del biclusters[bic1]
+        biclusters.append(newbic)
+    return biclusters[0]
+ 
+'''
+Print the tree structure, save as a jpeg image file.
+'''
+from PIL import Image, ImageDraw
+ 
+def getheight(clust):
+    if clust.left == None and clust.right == None: return 1
+    return getheight(clust.left) + getheight(clust.right)
+ 
+def getdepth(clust):
+    if clust.left == None and clust.right == None: return 0
+    return max(getdepth(clust.left), getdepth(clust.right)) + clust.distance
+ 
+def drawdendrogram(clust, labels, jpeg='clusters.jpg'):
+    h = getheight(clust) * 20
+    w = 1200
+    depth = getdepth(clust)
+    scaling = float(w - 150) / depth
+ 
+    img = Image.new('RGB', (w, h), (255, 255, 255))
+    draw = ImageDraw.Draw(img)
+    draw.line((0, h / 2, 10, h / 2), fill=(255, 0, 0))
+ 
+    drawnode(draw, clust, 10, (h / 2), scaling, labels)
+    img.save(jpeg, 'JPEG')
+  
+def drawnode(draw, clust, x, y, scaling, labels):
+    if clust.id &amp;lt; 0:
+        h1 = getheight(clust.left) * 20
+        h2 = getheight(clust.right) * 20
+        top = y - (h1 + h2) / 2
+        bottom = y + (h1 + h2) / 2
+        # line length
+        ll = clust.distance * scaling
+        draw.line((x, top + h1 / 2, x, bottom - h2 / 2), fill=(255, 0, 0))
+        draw.line((x, top + h1 / 2, x + ll, top + h1 / 2), fill=(255, 0, 0))
+        draw.line((x, bottom - h2 / 2, x + ll, bottom - h2 / 2), fill=(255, 0, 0))
+        drawnode(draw, clust.left, x + ll, top + h1 / 2, scaling, labels)
+        drawnode(draw, clust.right, x + ll, bottom - h2 / 2, scaling, labels)
+    else:
+        draw.text((x + 5, y - 7), labels[clust.id], (0, 0, 0))
+ 
+if __name__ == '__main__':
+    # pearson_distance
+    blogwords, blognames = importData()
+    clust = hcluster(blogwords, blognames)
+    print clust
+    drawdendrogram(clust, blognames, jpeg='blogclust1.jpg')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;3-运行结果&quot;&gt;3. 运行结果&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://ws4.sinaimg.cn/large/006tNc79ly1fsux1h7hroj30xc1j0q9d.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;三总结&quot;&gt;三、总结&lt;/h1&gt;
+&lt;p&gt;采用层次聚类的方法效果看起来挺不错，但是时间复杂度太大。自底向上的聚集法的时间复杂度为&lt;script type=&quot;math/tex&quot;&gt;O(n^{2}\log(n))&lt;/script&gt;，自顶向下的分割法的时间复杂度为&lt;script type=&quot;math/tex&quot;&gt;O(2^{n})&lt;/script&gt;。层次聚类的算法运算量太大无法运用于大规模数据，所以一般是将层次聚类跟kmeans聚类结合起来使用。
+用层次聚类算法得到信息的初始化信息，比如可以分成多少个簇，中心点的位置信息等，这样接下来可以利用这些信息来做Kmens聚类。这样的好处是可以解决Kmeans算法初始中心位置的随机性而且可以减少运算量，同时又避免了运用层次聚类算法的大运算量。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 13 Nov 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/</guid>
+        
+        <category>机器学习基础</category>
         
         
       </item>
