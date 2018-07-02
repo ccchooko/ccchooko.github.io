@@ -10,7 +10,8 @@ url: "http://ccchooko.github.io"
 
 # Comment
 comment:
-    disqus: ccchooko
+    gitalk
+    # disqus: ccchooko
     # uyan: 2143225  # 有言id,登录有言官网申请
 
 # Social
