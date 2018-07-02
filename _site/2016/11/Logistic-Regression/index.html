@@ -413,7 +413,7 @@ if __name__ == '__main__':
 <!-- Link Gitalk 的支持文件  -->
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
-<script src="/js/md5.min.js"></script> 
+<script src="../js/md5.min.js"></script> 
 <div id="gitalk-container"></div>     
 <script type="text/javascript">
     var gitalk = new Gitalk({
@@ -424,7 +424,7 @@ if __name__ == '__main__':
         repo: `ccchooko.github.io`,
         owner: 'ccchooko',
         admin: ['ccchooko'],
-        id: md5(),
+        id: md5(location.href),
     
     });
     gitalk.render('gitalk-container');
