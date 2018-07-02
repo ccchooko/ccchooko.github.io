@@ -543,7 +543,7 @@ Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpa
         
         
         <li class="next">
-            <a href="/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/" data-toggle="tooltip" data-placement="top" title="层次聚类">下一篇：  <span>层次聚类</span>
+            <a href="/2016/11/Hierarchical_Clustering/" data-toggle="tooltip" data-placement="top" title="层次聚类">下一篇：  <span>层次聚类</span>
             </a>
         </li>
         
@@ -554,22 +554,24 @@ Configuration file: /Users/baixinpan/Desktop/OpenSource/Mine/Page-Blog/leopardpa
 
   
 
-  <!-- Gitalk 评论 start  -->
+<!-- Gitalk 评论 start  -->
 
 <!-- Link Gitalk 的支持文件  -->
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
-<div id="gitalk-container"></div>     <script type="text/javascript">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script> 
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
     var gitalk = new Gitalk({
 
     // gitalk的主要参数
-        clientID: `4c7189e205e665b0ef76`,
+        clientID: `4c7189e205e665b0ef76D`,
         clientSecret: `7035156a47f4720f9ce10a64365a638914dfc46b`,
         repo: `ccchooko.github.io`,
         owner: 'ccchooko',
         admin: ['ccchooko'],
-        id: ['window.location.pathname']
-        
+        id: md5(),
+    
     });
     gitalk.render('gitalk-container');
 </script> 

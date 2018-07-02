@@ -5,9 +5,88 @@
     <description>欢迎来到我的个人站~</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 02 Jul 2018 13:13:09 +0800</pubDate>
-    <lastBuildDate>Mon, 02 Jul 2018 13:13:09 +0800</lastBuildDate>
+    <pubDate>Mon, 02 Jul 2018 15:07:42 +0800</pubDate>
+    <lastBuildDate>Mon, 02 Jul 2018 15:07:42 +0800</lastBuildDate>
     <generator>Jekyll v3.5.2</generator>
+    
+      <item>
+        <title>Markdown工具集</title>
+        <description>&lt;h3 id=&quot;什么是-markdown&quot;&gt;什么是 Markdown&lt;/h3&gt;
+
+&lt;p&gt;　　Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：如您正在阅读的这篇文章。它使用简单的符号标记不同的标题，分割不同的段落，&lt;strong&gt;粗体&lt;/strong&gt; 或者 &lt;em&gt;斜体&lt;/em&gt; 某些文字.&lt;/p&gt;
+
+&lt;p&gt;　　很多产品的文档也是用markdown编写的，并且以“README.MD”的文件名保存在软件的目录下面。             &lt;br /&gt;
+　　&lt;/p&gt;
+
+&lt;h3 id=&quot;一些基本语法&quot;&gt;一些基本语法&lt;/h3&gt;
+
+&lt;p&gt;标题          &lt;br /&gt;
+H1 :# Header 1          &lt;br /&gt;
+H2 :## Header 2         &lt;br /&gt;
+H3 :### Header 3         &lt;br /&gt;
+H4 :#### Header 4         &lt;br /&gt;
+H5 :##### Header 5          &lt;br /&gt;
+H6 :###### Header 6    &lt;br /&gt;
+链接 :&lt;a href=&quot;URL&quot;&gt;Title&lt;/a&gt;      &lt;br /&gt;
+加粗 :&lt;strong&gt;Bold&lt;/strong&gt;      &lt;br /&gt;
+斜体字 :&lt;em&gt;Italics&lt;/em&gt;       &lt;br /&gt;
+&lt;em&gt;删除线 :&lt;del&gt;text&lt;/del&gt;        &lt;br /&gt;
+段落 : 段落之间空一行         &lt;br /&gt;
+换行符 : 一行结束时输入两个空格         &lt;br /&gt;
+列表 :&lt;/em&gt; 添加星号成为一个新的列表项。        &lt;br /&gt;
+引用 :&amp;gt; 引用内容             &lt;br /&gt;
+内嵌代码 : &lt;code class=&quot;highlighter-rouge&quot;&gt;alert('Hello World');&lt;/code&gt;      &lt;br /&gt;
+画水平线 (HR) :——–&lt;/p&gt;
+
+&lt;p&gt;css 的大部分语法同样可以在 markdown 上使用，但不同的渲染器渲染出来的 markdown 内容样式也不一样，下面这些链接里面有 markdown 基本语法，你也可以在下面几个平台上尝试着写一些。&lt;/p&gt;
+
+&lt;h3 id=&quot;一些好用的-markdown-编辑器&quot;&gt;一些好用的 Markdown 编辑器&lt;/h3&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://mahua.jser.me/?utm_source=mindstore.io&quot;&gt;MaHua&lt;/a&gt; 在线 Markdown 编辑器 ,无须测试。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/markdown/image1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://mdp.tylingsoft.com/&quot;&gt;Markdown Plus&lt;/a&gt; 一款 Markdown 编辑器，可以支持添加任务列表、emoji、流程图等。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/markdown/image2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.zybuluo.com/cmd/?utm_source=mindstore.io&quot;&gt;Cmd Markdown&lt;/a&gt; 作业部落在线 Markdown 编辑器推出桌面版客户端啦，全平台支援。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/markdown/image3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/MacDownApp/macdown&quot;&gt;Macdown&lt;/a&gt; Github 上开源的 Mac 平台上的 Markdown 编辑器&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/editor?utm_source=mindstore.io&quot;&gt;GitBook Editor&lt;/a&gt; 一款团队在线编辑文档工具。可以轻松书写笔记，支持团队协同编辑。同时支持 Markdown 语法，还保持了印象笔记的风格并可在线预览。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.glamdevelopment.com/outlinely?utm_source=mindstore.io&quot;&gt;Outlinely&lt;/a&gt; 界面简洁大方的大纲类 Mac 软件，使用起来很简单，而且支持输出 Markdown 格式。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://classeur.io/?utm_source=mindstore.io&quot;&gt;Classeur&lt;/a&gt; 实用简洁的 Markdown 写作工具，快速上手。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/geekcompany/DeerResume?utm_source=mindstore.io&quot;&gt;DeerResume&lt;/a&gt; 程序员专用 MarkDown 简历制作在线工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;转载请注明：&lt;a href=&quot;http://baixin&quot;&gt;潘柏信的博客&lt;/a&gt; » &lt;a href=&quot;http://baixin.io/2016/11/markdownTool/&quot;&gt;Markdown工具集&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 20 Nov 2016 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2016/11/markdownTool/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/markdownTool/</guid>
+        
+        <category>工具</category>
+        
+        
+      </item>
     
       <item>
         <title>逻辑回归</title>
@@ -147,8 +226,8 @@ if __name__ == '__main__':
 
 </description>
         <pubDate>Sun, 20 Nov 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/</guid>
+        <link>http://localhost:4000/2016/11/Logistic-Regression/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/Logistic-Regression/</guid>
         
         <category>机器学习基础</category>
         
@@ -246,89 +325,10 @@ show_linear_line(X, Y)
 &lt;p&gt;&lt;img src=&quot;https://ws1.sinaimg.cn/large/006tNc79ly1fsuxj956rwj30i80fwmy0.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 20 Nov 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</guid>
+        <link>http://localhost:4000/2016/11/Linear_Regression/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/Linear_Regression/</guid>
         
         <category>机器学习基础</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Markdown工具集</title>
-        <description>&lt;h3 id=&quot;什么是-markdown&quot;&gt;什么是 Markdown&lt;/h3&gt;
-
-&lt;p&gt;　　Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：如您正在阅读的这篇文章。它使用简单的符号标记不同的标题，分割不同的段落，&lt;strong&gt;粗体&lt;/strong&gt; 或者 &lt;em&gt;斜体&lt;/em&gt; 某些文字.&lt;/p&gt;
-
-&lt;p&gt;　　很多产品的文档也是用markdown编写的，并且以“README.MD”的文件名保存在软件的目录下面。             &lt;br /&gt;
-　　&lt;/p&gt;
-
-&lt;h3 id=&quot;一些基本语法&quot;&gt;一些基本语法&lt;/h3&gt;
-
-&lt;p&gt;标题          &lt;br /&gt;
-H1 :# Header 1          &lt;br /&gt;
-H2 :## Header 2         &lt;br /&gt;
-H3 :### Header 3         &lt;br /&gt;
-H4 :#### Header 4         &lt;br /&gt;
-H5 :##### Header 5          &lt;br /&gt;
-H6 :###### Header 6    &lt;br /&gt;
-链接 :&lt;a href=&quot;URL&quot;&gt;Title&lt;/a&gt;      &lt;br /&gt;
-加粗 :&lt;strong&gt;Bold&lt;/strong&gt;      &lt;br /&gt;
-斜体字 :&lt;em&gt;Italics&lt;/em&gt;       &lt;br /&gt;
-&lt;em&gt;删除线 :&lt;del&gt;text&lt;/del&gt;        &lt;br /&gt;
-段落 : 段落之间空一行         &lt;br /&gt;
-换行符 : 一行结束时输入两个空格         &lt;br /&gt;
-列表 :&lt;/em&gt; 添加星号成为一个新的列表项。        &lt;br /&gt;
-引用 :&amp;gt; 引用内容             &lt;br /&gt;
-内嵌代码 : &lt;code class=&quot;highlighter-rouge&quot;&gt;alert('Hello World');&lt;/code&gt;      &lt;br /&gt;
-画水平线 (HR) :——–&lt;/p&gt;
-
-&lt;p&gt;css 的大部分语法同样可以在 markdown 上使用，但不同的渲染器渲染出来的 markdown 内容样式也不一样，下面这些链接里面有 markdown 基本语法，你也可以在下面几个平台上尝试着写一些。&lt;/p&gt;
-
-&lt;h3 id=&quot;一些好用的-markdown-编辑器&quot;&gt;一些好用的 Markdown 编辑器&lt;/h3&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://mahua.jser.me/?utm_source=mindstore.io&quot;&gt;MaHua&lt;/a&gt; 在线 Markdown 编辑器 ,无须测试。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/markdown/image1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://mdp.tylingsoft.com/&quot;&gt;Markdown Plus&lt;/a&gt; 一款 Markdown 编辑器，可以支持添加任务列表、emoji、流程图等。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/markdown/image2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.zybuluo.com/cmd/?utm_source=mindstore.io&quot;&gt;Cmd Markdown&lt;/a&gt; 作业部落在线 Markdown 编辑器推出桌面版客户端啦，全平台支援。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/posts/markdown/image3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/MacDownApp/macdown&quot;&gt;Macdown&lt;/a&gt; Github 上开源的 Mac 平台上的 Markdown 编辑器&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.gitbook.com/editor?utm_source=mindstore.io&quot;&gt;GitBook Editor&lt;/a&gt; 一款团队在线编辑文档工具。可以轻松书写笔记，支持团队协同编辑。同时支持 Markdown 语法，还保持了印象笔记的风格并可在线预览。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.glamdevelopment.com/outlinely?utm_source=mindstore.io&quot;&gt;Outlinely&lt;/a&gt; 界面简洁大方的大纲类 Mac 软件，使用起来很简单，而且支持输出 Markdown 格式。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://classeur.io/?utm_source=mindstore.io&quot;&gt;Classeur&lt;/a&gt; 实用简洁的 Markdown 写作工具，快速上手。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/geekcompany/DeerResume?utm_source=mindstore.io&quot;&gt;DeerResume&lt;/a&gt; 程序员专用 MarkDown 简历制作在线工具。&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;转载请注明：&lt;a href=&quot;http://baixin&quot;&gt;潘柏信的博客&lt;/a&gt; » &lt;a href=&quot;http://baixin.io/2016/11/markdownTool/&quot;&gt;Markdown工具集&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sun, 20 Nov 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/markdownTool/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/markdownTool/</guid>
-        
-        <category>工具</category>
         
         
       </item>
@@ -536,8 +536,8 @@ if __name__ == '__main__':
 用层次聚类算法得到信息的初始化信息，比如可以分成多少个簇，中心点的位置信息等，这样接下来可以利用这些信息来做Kmens聚类。这样的好处是可以解决Kmeans算法初始中心位置的随机性而且可以减少运算量，同时又避免了运用层次聚类算法的大运算量。&lt;/p&gt;
 </description>
         <pubDate>Sun, 13 Nov 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/</guid>
+        <link>http://localhost:4000/2016/11/Hierarchical_Clustering/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/11/Hierarchical_Clustering/</guid>
         
         <category>机器学习基础</category>
         

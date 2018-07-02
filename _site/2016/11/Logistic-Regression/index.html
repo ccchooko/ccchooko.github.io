@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-  <link rel="canonical" href="http://localhost:4000/2016/11/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/">
+  <link rel="canonical" href="http://localhost:4000/2016/11/Logistic-Regression/">
   <link rel="alternate" type="application/rss+xml" title="抠脚男孩儿" href="http://localhost:4000/feed.xml">
   
   <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
@@ -391,10 +391,15 @@ if __name__ == '__main__':
        <ul class="pager">
         
         <li class="previous">
-            <a href="/2016/11/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/" data-toggle="tooltip" data-placement="top" title="线性回归">上一篇：  <span>线性回归</span>
+            <a href="/2016/11/Linear_Regression/" data-toggle="tooltip" data-placement="top" title="线性回归">上一篇：  <span>线性回归</span>
             </a>
         </li>
         
+        
+        <li class="next">
+            <a href="/2016/11/markdownTool/" data-toggle="tooltip" data-placement="top" title="Markdown工具集">下一篇：  <span>Markdown工具集</span>
+            </a>
+        </li>
         
     </ul>
 </section>
@@ -403,22 +408,24 @@ if __name__ == '__main__':
 
   
 
-  <!-- Gitalk 评论 start  -->
+<!-- Gitalk 评论 start  -->
 
 <!-- Link Gitalk 的支持文件  -->
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
-<div id="gitalk-container"></div>     <script type="text/javascript">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="/js/md5.min.js"></script> 
+<div id="gitalk-container"></div>     
+<script type="text/javascript">
     var gitalk = new Gitalk({
 
     // gitalk的主要参数
-        clientID: `4c7189e205e665b0ef76`,
+        clientID: `4c7189e205e665b0ef76D`,
         clientSecret: `7035156a47f4720f9ce10a64365a638914dfc46b`,
         repo: `ccchooko.github.io`,
         owner: 'ccchooko',
         admin: ['ccchooko'],
-        id: ['window.location.pathname']
-        
+        id: md5(),
+    
     });
     gitalk.render('gitalk-container');
 </script> 
