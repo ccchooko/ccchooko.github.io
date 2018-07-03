@@ -9,9 +9,19 @@ avatarDesc: 分布式 / 机器学习 ／ 数据分析
 url: "http://ccchooko.github.io"
 
 # Comment
-comment:
-    disqus: ccchooko
+# comment:
+    # disqus: ccchooko
     # uyan: 2143225  # 有言id,登录有言官网申请
+
+# Gitalk
+gitalk:
+  enable: true    #是否开启Gitalk评论
+  clientID: aa23fb52c5e8860d264b                            #生成的clientID
+  clientSecret: 4feb9d7290526f5966abfb1098d22f5aecd741fe    #生成的clientSecret
+  repo: ccchooko.github.io    #仓库名称
+  owner: ccchooko    #github用户名
+  admin: ccchooko
+  distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
 # Social
 social:

@@ -472,25 +472,28 @@ if __name__ == '__main__':
 <section class="post-comments">
 
   
-    <div id="disqus_thread"></div>
-    <script>
+
+  <!-- Gitalk 评论 start  -->
     
-    var disqus_config = function () {
-        this.page.url = "http://localhost:4000/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/";
-        this.page.identifier = "/2016/11/%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB/";
-    };
-    var disqus_shortname = 'ccchooko';
-    
-    (function() { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
+    <!-- Gitalk link  -->
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+
+    <div id="gitalk-container"></div>
+        <script type="text/javascript">
+        var gitalk = new Gitalk({
+        clientID: 'aa23fb52c5e8860d264b',
+        clientSecret: '4feb9d7290526f5966abfb1098d22f5aecd741fe',
+        repo: 'qiubaiying.github.io',
+        owner: 'qiubaiying',
+        admin: ['qiubaiying'],
+        id: window.location.pathname,
+        });
+        gitalk.render('gitalk-container');
     </script>
-    <noscript>要查看<a href="http://disqus.com/?ref_noscript"> Disqus </a>评论，请启用 JavaScript</noscript>
     
-  
+    <!-- Gitalk end -->
+
 
 </section>
 
