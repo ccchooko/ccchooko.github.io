@@ -23,7 +23,6 @@ gitalk:
   admin: ccchooko
   distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
-
 # Social
 social:
     weibo: 1840551072 
